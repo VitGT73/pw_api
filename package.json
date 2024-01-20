@@ -1,0 +1,32 @@
+{
+  "name": "pw_api",
+  "version": "1.0.0",
+  "description": "API test Automation checks for <https://playwrightsolutions.com>",
+  "main": "index.js",
+  "scripts": {
+    "ut": "jest --verbose",
+    "test": "npx playwright test --grep-invert=@unsatisfactory",
+    "test:generate:schema": "GENERATE_SCHEMA_TRACKING_DATA=true npx playwright test --grep-invert=@unsatisfactory",
+    "test:staging": "test_env=staging npx playwright test --grep-invert=@unsatisfactory",
+    "test:local": "test_env=local npx playwright test --grep-invert=@unsatisfactory",
+    "test:happy": "npx playwright test --grep @happy --grep-invert=@unsatisfactory",
+    "test:unsatisfactory": "npx playwright test --grep=@unsatisfactory",
+    "ui": "npx playwright test --ui",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier . --check",
+    "prettier:fix": "prettier . --write",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "@playwright/test": "^1.41.1",
+    "@types/node": "^20.11.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.2"
+  }
+}
