@@ -1,3 +1,7 @@
+//COVERAGE_TAG: GET /booking/
+//COVERAGE_TAG: GET /booking/{id}
+//COVERAGE_TAG: GET /booking/summary
+
 import { test, expect } from "@fixtures/fixtures";
 import { createHeaders, createInvalidHeaders } from "@helpers/createHeaders";
 // import { isValidDate } from "../../lib/helpers/date";
@@ -57,6 +61,7 @@ test.describe("booking/ GET requests", async () => {
         expect(response.status()).toBe(200);
 
         const body = await response.json();
+
         expect(body.bookings.length).toBeGreaterThanOrEqual(1);
         expect(body.bookings[0].bookingid).toBe(1);
         expect(body.bookings[0].roomid).toBe(1);
