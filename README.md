@@ -17,3 +17,11 @@ npm install dotenv --save
 npm install --save-dev @faker-js/faker
 ```
 git@github.com:VitGT73/pw_api.git
+
+echo "# pw_api_reqres" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:VitGT73/pw_api.git
+git push -u origin main

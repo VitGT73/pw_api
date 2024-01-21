@@ -4,7 +4,7 @@ import { stringDateByDays } from "@helpers/date";
 import { createHeaders } from "@helpers/createHeaders";
 import Env from "@helpers/env";
 
-const url = Env.URL || "https://automationintesting.online/";
+const url = Env.URL || "https://automationintesting.online";
 let bookingBody;
 let checkOutArray;
 
@@ -63,7 +63,7 @@ export async function createFutureBooking(roomId: number) {
     };
 
     const createRequestContext = await request.newContext();
-    const response = await createRequestContext.post(url + "booking/", {
+    const response = await createRequestContext.post(url + "/booking/", {
       headers: headers,
       data: bookingBody,
     });
@@ -88,7 +88,7 @@ export async function getBookings(roomId: number) {
   const headers = await createHeaders();
 
   const createRequestContext = await request.newContext();
-  const response = await createRequestContext.get(url + "booking/?roomid=" + roomId, {
+  const response = await createRequestContext.get(url + "/booking/?roomid=" + roomId, {
     headers: headers,
   });
 
@@ -105,7 +105,7 @@ export async function getBookings(roomId: number) {
  */
 export async function getBookingSummary(bookingId: number) {
   const createRequestContext = await request.newContext();
-  const response = await createRequestContext.get(url + `booking/summary?roomid=${bookingId}`);
+  const response = await createRequestContext.get(url + `/booking/summary?roomid=${bookingId}`);
 
   expect(response.status()).toBe(200);
   const body = await response.json();
@@ -121,7 +121,7 @@ export async function getBookingById(bookingId: number) {
   const headers = await createHeaders();
 
   const createRequestContext = await request.newContext();
-  const response = await createRequestContext.get(url + `booking/${bookingId}`, {
+  const response = await createRequestContext.get(url + `/booking/${bookingId}`, {
     headers: headers,
   });
 
