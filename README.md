@@ -27,7 +27,45 @@ git remote add origin git@github.com:VitGT73/pw_api.git
 git push -u origin main
 
 
+## [Настройка ESLint && Prettier && Husky](https://playwrightsolutions.com/the-definitive-guide-to-api-test-automation-with-playwright-part-8-adding-eslint-prettier-and-husky/)
+
 ESLint install ([typescript-eslint](https://typescript-eslint.io/getting-started))
 ```
 npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint typescript
 ```
+Только проверка без исправлений:
+```
+npx eslint .
+```
+
+Исправление ошибок:
+```
+npx eslint . --fix
+```
+
+
+[Как отключить ESLint для некоторых строк, файлов или папок](https://learn.coderslang.com/0023-eslint-disable-for-specific-lines-files-and-folders/)
+
+
+[Prettier](https://prettier.io/docs/en/install)
+
+Отключает настройки ESLint, конфликтующие с Prettier
+```
+npm install --save-dev eslint-config-prettier
+```
+Установка Prettier
+```
+npm install --save-dev --save-exact prettier
+```
+
+Проверка без исправления:
+```npx prettier . --check```
+
+Исправление ошибок
+```
+npx prettier . --write
+```
+
+[Husky](https://typicode.github.io/husky/get-started.html)
+
+```npx husky-init && npm install```
