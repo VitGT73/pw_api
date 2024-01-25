@@ -1,33 +1,33 @@
 //COVERAGE_TAG: POST /booking/
 
 import { test, expect } from "@playwright/test";
-import {
-  createRandomBookingBody,
-  futureOpenCheckinDate,
-} from "../../lib/datafactory/booking";
-import { stringDateByDays } from "../../lib/helpers/date";
+import { createRandomBookingBody, futureOpenCheckinDate } from "@datafactory/booking";
+import { stringDateByDays } from "@helpers/date";
+import { createRoom } from "@datafactory/room";
+// import { validateJsonSchema } from "@helpers/validateJsonSchema";
+// import { validateAgainstSchema } from "@helpers/validateAgainstSchema";
 
-test.describe("booking/ POST requests", async () => {
+test.describe("booking/ POST requests @booking", async () => {
   let requestBody;
-  let roomId = 1;
+  let roomId;
 
-  test.beforeEach(async ({ request }) => {
-    let futureCheckinDate = await futureOpenCheckinDate(roomId);
-    let checkInString = futureCheckinDate.toISOString().split("T")[0];
-    let checkOutString = stringDateByDays(futureCheckinDate, 2);
+  test.beforeEach(async () => {
+    const room = await createRoom();
+    roomId = room.roomid;
 
-    requestBody = await createRandomBookingBody(
-      roomId,
-      checkInString,
-      checkOutString
-    );
+    const futureCheckinDate = await futureOpenCheckinDate(roomId);
+    const checkInString = futureCheckinDate.toISOString().split("T")[0];
+    const checkOutString = stringDateByDays(futureCheckinDate, 2);
+
+    requestBody = await createRandomBookingBody(roomId, checkInString, checkOutString);
   });
 
-  test("POST new booking with full body", async ({ request }) => {
+  test("POST new booking with full body @happy", async ({ request }) => {
     const response = await request.post("booking/", {
       data: requestBody,
     });
 
+    // if 409 is returned, it means the room is already booked for the dates, will refactor to create a new room to book so we don't get these conflicts
     expect(response.status()).toBe(201);
 
     const body = await response.json();
@@ -43,5 +43,9 @@ test.describe("booking/ POST requests", async () => {
     const bookingdates = booking.bookingdates;
     expect(bookingdates.checkin).toBe(requestBody.bookingdates.checkin);
     expect(bookingdates.checkout).toBe(requestBody.bookingdates.checkout);
+
+    // await validateJsonSchema("POST_booking", "booking", body);
+    // await validateAgainstSchema(booking, "Booking", "booking", ["email", "phone"]);
+    // await validateAgainstSchema(booking.bookingdates, "BookingDates", "booking");
   });
 });

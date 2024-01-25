@@ -8,7 +8,7 @@ import { createHeaders } from "@helpers/createHeaders";
 // import { validateJsonSchema } from "@helpers/validateJsonSchema";
 import { test, expect } from "@fixtures/fixtures";
 
-test.describe.only("report/ GET requests @report", async () => {
+test.describe("report/ GET requests @report", async () => {
   let headers;
   let room;
 

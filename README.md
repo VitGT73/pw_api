@@ -25,3 +25,9 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin git@github.com:VitGT73/pw_api.git
 git push -u origin main
+
+
+ESLint install ([typescript-eslint](https://typescript-eslint.io/getting-started))
+```
+npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint typescript
+```
