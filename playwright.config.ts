@@ -29,6 +29,7 @@ export default defineConfig({
   //     dependencies: ["setup"],
   //   },
   // ],
+  workers: 16,
   testDir: "tests",
   projects: [
     { name: "setup", testMatch: /coverage.setup.ts/, teardown: "teardown" },
