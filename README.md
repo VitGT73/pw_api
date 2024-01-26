@@ -72,3 +72,7 @@ npx prettier . --write
 
 Add to ```.husky/pre-commit```
 ```npm run lint && npm run prettier```
+
+Если все таки нужно срочно закоммитить:
+```git commit -m "forcing the commit" --no-verify```
+
