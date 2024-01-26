@@ -69,3 +69,6 @@ npx prettier . --write
 [Husky](https://typicode.github.io/husky/get-started.html)
 
 ```npx husky-init && npm install```
+
+Add to ```.husky/pre-commit```
+```npm run lint && npm run prettier```
