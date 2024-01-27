@@ -1,6 +1,15 @@
 {
+  "tabWidth": 2,
   "semi": true,
   "trailingComma": "es5",
   "singleQuote": false,
-  "printWidth": 120
+  "printWidth": 120,
+  "overrides": [
+    {
+      "files": ["*.py"],
+      "options": {
+        "tabWidth": 4
+      }
+    }
+  ]
 }

@@ -4,6 +4,9 @@ test-results/
 playwright-report
 summary.json
 
+package-lock.json
+package.json
+
 # IDE - VSCode
 .vscode/*
 

@@ -76,3 +76,10 @@ Add to ```.husky/pre-commit```
 Если все таки нужно срочно закоммитить:
 ```git commit -m "forcing the commit" --no-verify```
 
+## Установка библиотек для работы с json файлами
+
+[genson-js](https://www.npmjs.com/package/genson-js)
+```npm install genson-js --save-dev```
+
+[ajv](https://www.npmjs.com/package/ajv)
+```npm install ajv --save-dev```

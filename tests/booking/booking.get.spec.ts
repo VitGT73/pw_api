@@ -4,7 +4,7 @@
 
 import { test, expect } from "@fixtures/fixtures";
 import { createHeaders, createInvalidHeaders } from "@helpers/createHeaders";
-// import { validateJsonSchema } from "@helpers/validateJsonSchema";
+import { validateJsonSchema } from "@helpers/validateJsonSchema";
 import { addWarning } from "@helpers/warnings";
 // import { validateAgainstSchema } from "@helpers/validateAgainstSchema";
 
@@ -23,12 +23,19 @@ test.describe("booking/ GET requests @booking", async () => {
     expect(response.status()).toBe(200);
 
     const body = await response.json();
+
     expect(body.bookings.length).toBeGreaterThanOrEqual(1);
+
 
     expect(body.bookings[0].bookingDates.checkin).toBeValidDate();
     expect(body.bookings[0].bookingDates.checkout).toBeValidDate();
+  
 
-    // await validateJsonSchema("GET_booking_summary", "booking", body);
+    // Для создания JSON-схемы, мы в качестве последнего параметра, передаем 'true'
+    // при вызове validateJsonSchema
+
+    // await validateJsonSchema("GET_booking_summary", "booking", body, true);
+    await validateJsonSchema("GET_booking_summary", "booking", body);
     // await validateAgainstSchema(body.bookings[0].bookingDates, "BookingDates", "booking");
 
     await addWarning("This test should be refactored: '" + test.info().title + "' to use custom assertions");
@@ -72,7 +79,7 @@ test.describe("booking/ GET requests @booking", async () => {
     expect(body.bookings[0].bookingdates.checkin).toBeValidDate();
     expect(body.bookings[0].bookingdates.checkout).toBeValidDate();
 
-    // await validateJsonSchema("GET_all_bookings", "booking", body);
+    await validateJsonSchema("GET_all_bookings", "booking", body);
     // await validateAgainstSchema(body.bookings[0], "Booking", "booking", ["email", "phone"]);
   });
 
@@ -103,7 +110,7 @@ test.describe("booking/ GET requests @booking", async () => {
     expect(body.bookingdates.checkin).toBeValidDate();
     expect(body.bookingdates.checkout).toBeValidDate();
 
-    // await validateJsonSchema("GET_booking_id", "booking", body);
+    await validateJsonSchema("GET_booking_id", "booking", body);
   });
 
   test("GET booking by id that doesn't exist", async ({ request }) => {
