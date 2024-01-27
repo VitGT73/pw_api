@@ -26,10 +26,8 @@ test.describe("booking/ GET requests @booking", async () => {
 
     expect(body.bookings.length).toBeGreaterThanOrEqual(1);
 
-
     expect(body.bookings[0].bookingDates.checkin).toBeValidDate();
     expect(body.bookings[0].bookingDates.checkout).toBeValidDate();
-  
 
     // Для создания JSON-схемы, мы в качестве последнего параметра, передаем 'true'
     // при вызове validateJsonSchema
