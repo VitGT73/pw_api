@@ -4,7 +4,8 @@ export { test } from "@playwright/test";
 
 export const expect = baseExpect.extend({
   toBeValidDate(received: any) {
-    const pass = Date.parse(received) && typeof received === "string" ? true : false;
+    const pass = typeof received === "string" && Date.parse(received) ? true : false;
+    // const pass = Date.parse(received) && typeof received === "string" ? true : false;
     if (pass) {
       return {
         message: () => "passed",

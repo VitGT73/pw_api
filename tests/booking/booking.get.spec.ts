@@ -8,7 +8,7 @@ import { validateJsonSchema } from "@helpers/validateJsonSchema";
 import { addWarning } from "@helpers/warnings";
 // import { validateAgainstSchema } from "@helpers/validateAgainstSchema";
 
-test.describe.only("booking/ GET requests @booking", async () => {
+test.describe("booking/ GET requests @booking", async () => {
   let headers;
   let invalidHeader;
 
@@ -21,7 +21,6 @@ test.describe.only("booking/ GET requests @booking", async () => {
     const response = await request.get("booking/summary?roomid=1");
 
     expect(response.status()).toBe(200);
-    expect(response.status()).toBeString();
 
     const body = await response.json();
 
