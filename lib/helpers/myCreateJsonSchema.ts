@@ -32,8 +32,8 @@ export async function getSwaggerFromURL(jsonURL: string) {
 }
 
 export async function getSwaggerFromFile(route: string) {
-  const filePath = `./.api${route}`;
-  const swaggerFileName = `${filePath}${route}AllSwagger.json`;
+  const swaggerFilePath = `./.api${route}`;
+  const swaggerFileName = `${swaggerFilePath}${route}AllSwagger.json`;
   try {
     const schema = await SwaggerParser.dereference(swaggerFileName);
     // const schemaString = JSON.stringify(schema, null, 2);
@@ -44,13 +44,13 @@ export async function getSwaggerFromFile(route: string) {
   }
 }
 
-export async function generatePathResponseList(route: string, saveToFile: boolean) {
-  const filePath = `./.api${route}`;
-  const swaggerFilePath = `${filePath}${route}AllSwagger.json`;
-
+export async function generatePathResponseList(route: string, saveSchemasToFile: boolean) {
+  const dirName = `./.api${route}`;
+  const swaggerFileName = `${dirName}${route}AllSwagger.json`;
+  const apiPathToSchemas: string[] = []
   try {
     // Загрузка и дереференциация Swagger-спецификации
-    const dereferencedSpec = await SwaggerParser.dereference(swaggerFilePath);
+    const dereferencedSpec = await SwaggerParser.dereference(swaggerFileName);
 
     // Обход всех путей
     for (const path in dereferencedSpec.paths) {
@@ -69,29 +69,26 @@ export async function generatePathResponseList(route: string, saveToFile: boolea
             // Проверка наличия схемы (schema) внутри кода ответа
             if (response.content && response.content["*/*"] && response.content["*/*"].schema) {
               const pathToSchema = `schema.paths["${path}"]['${method}']['responses'][${responseCode}]['content']["*/*"].schema`;
+              const message = `${method} ${path} - ${responseCode}: ${pathToSchema}`
+              apiPathToSchemas.push(message)
+              console.log(`Путь до схемы: ${pathToSchema}`);
 
-              if (saveToFile) {
-                const fileName = `${path}_${method}_${responseCode}_schema.json`;
-                const filePath = `.api${route}/${fileName}`;
+              if (saveSchemasToFile) {
+                // const filePath = `.api${route}/${fileName}`;
+                const schemaFileName = `${dirName}${path}_${method}_${responseCode}_schema.json`;
 
                 // Создание каталога "output", если он не существует
-                try {
-                  await fs.mkdir("output", { recursive: true });
-                } catch (mkdirError) {
-                  console.error("Ошибка при создании каталога:", mkdirError);
-                }
+                await createDir(dirName);
 
-                // Запись схемы в файл
-                try {
-                  await fs.writeFile(filePath, JSON.stringify(response.content["*/*"].schema, null, 2));
-                  console.log(`Схема сохранена в файле: ${filePath}`);
-                } catch (writeFileError) {
-                  console.error("Ошибка при записи в файл:", writeFileError);
-                }
+
+                const schemaString = JSON.stringify(response.content["*/*"].schema, null, 2)
+                await writeDataToFile(schemaFileName, schemaString);
+                console.log(`Схема сохранена в файле: ${dirName}`);
               }
-              console.log(`Путь до схемы: ${pathToSchema}`);
             }
           }
+          const schemaHelperFileName = `${dirName}/schemaHelper.txt`
+          await writeDataToFile(schemaHelperFileName, apiPathToSchemas.join("\n"))
         }
       }
     }
@@ -100,10 +97,18 @@ export async function generatePathResponseList(route: string, saveToFile: boolea
   }
 }
 
-export async function writeMyJsonFile(location: string, data: string) {
+export async function createDir(directoryName: string) {
   try {
-    await fs.writeFile(location, data);
-  } catch (err) {
-    console.error(err);
+    await fs.mkdir(directoryName, { recursive: true });
+  } catch (mkdirError) {
+    console.error("Ошибка при создании каталога:", mkdirError);
+  }
+}
+
+export async function writeDataToFile(location: string, data: string) {
+  try {
+    await fs.writeFile(location, data,{ encoding: "utf-8", flag: "w" });
+  } catch (writeFileError) {
+    console.error("Ошибка при записи в файл:", writeFileError);
   }
 }

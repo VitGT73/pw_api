@@ -36,7 +36,7 @@ test.describe("booking/ POST requests @booking", async () => {
   });
 
   test.only("Get all methods", async () => {
-    const saveJsonSchemasToFile = true;
+    const saveJsonSchemasToFile = false;
     await generatePathResponseList(APIRoutes.booking, saveJsonSchemasToFile);
   });
 
