@@ -32,15 +32,15 @@ export default defineConfig({
   workers: 16,
   testDir: "tests",
   projects: [
-    { name: "setup", testMatch: /coverage.setup.ts/, teardown: "teardown" },
+    // { name: "setup", testMatch: /coverage.setup.ts/, teardown: "teardown" },
     {
       name: "api-checks",
-      dependencies: ["setup"],
+      // dependencies: ["setup"],
     },
-    {
-      name: "teardown",
-      testMatch: /completion.teardown.ts/,
-    },
+    // {
+    //   name: "teardown",
+    //   testMatch: /completion.teardown.ts/,
+    // },
   ],
 
   use: {
