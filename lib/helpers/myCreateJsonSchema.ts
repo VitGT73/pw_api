@@ -4,18 +4,18 @@ import * as fs from "fs/promises";
 // import fs from "fs";
 
 // export async function createJsonSchema(name: string, path: string, json: object) {
-export async function saveSwaggerToFile(jsonURL: string, route: string) {
-  const filePath = `./.api${route}`;
+export async function saveSwaggerToFile(jsonURL: string, endpoint: string) {
+  const filePath = `./.api/${endpoint}`;
 
   try {
     await fs.mkdir(filePath, { recursive: true });
     const schema = await SwaggerParser.dereference(jsonURL);
     const swaggerString = JSON.stringify(schema, null, 2);
-    const swaggerFileName = `${filePath}${route}AllSwagger.json`;
+    const swaggerFileName = `${filePath}${endpoint}AllSwagger.json`;
 
-    await writeMyJsonFile(swaggerFileName, swaggerString);
+    await writeDataToFile(swaggerFileName, swaggerString);
 
-    console.log(`JSON Schema for ${route} created and saved.`);
+    console.log(`JSON Schema for ${endpoint} created and saved.`);
   } catch (err) {
     console.error(err);
   }
@@ -31,9 +31,9 @@ export async function getSwaggerFromURL(jsonURL: string) {
   }
 }
 
-export async function getSwaggerFromFile(route: string) {
-  const swaggerFilePath = `./.api${route}`;
-  const swaggerFileName = `${swaggerFilePath}${route}AllSwagger.json`;
+export async function getSwaggerFromFile(endpoint: string) {
+  const swaggerFilePath = `./.api/${endpoint}`;
+  const swaggerFileName = `${swaggerFilePath}${endpoint}AllSwagger.json`;
   try {
     const schema = await SwaggerParser.dereference(swaggerFileName);
     // const schemaString = JSON.stringify(schema, null, 2);
@@ -44,10 +44,10 @@ export async function getSwaggerFromFile(route: string) {
   }
 }
 
-export async function generatePathResponseList(route: string, saveSchemasToFile: boolean) {
-  const dirName = `./.api${route}`;
-  const swaggerFileName = `${dirName}${route}AllSwagger.json`;
-  const apiPathToSchemas: string[] = []
+export async function generatePathResponseList(endpoint: string, saveSchemasToFile: boolean) {
+  const dirName = `./.api/${endpoint}`;
+  const swaggerFileName = `${dirName}${endpoint}AllSwagger.json`;
+  const apiPathToSchemas: string[] = [];
   try {
     // Загрузка и дереференциация Swagger-спецификации
     const dereferencedSpec = await SwaggerParser.dereference(swaggerFileName);
@@ -69,8 +69,8 @@ export async function generatePathResponseList(route: string, saveSchemasToFile:
             // Проверка наличия схемы (schema) внутри кода ответа
             if (response.content && response.content["*/*"] && response.content["*/*"].schema) {
               const pathToSchema = `schema.paths["${path}"]['${method}']['responses'][${responseCode}]['content']["*/*"].schema`;
-              const message = `${method} ${path} - ${responseCode}: ${pathToSchema}`
-              apiPathToSchemas.push(message)
+              const message = `${method} ${path} - ${responseCode}: ${pathToSchema}`;
+              apiPathToSchemas.push(message);
               console.log(`Путь до схемы: ${pathToSchema}`);
 
               if (saveSchemasToFile) {
@@ -80,15 +80,14 @@ export async function generatePathResponseList(route: string, saveSchemasToFile:
                 // Создание каталога "output", если он не существует
                 await createDir(dirName);
 
-
-                const schemaString = JSON.stringify(response.content["*/*"].schema, null, 2)
+                const schemaString = JSON.stringify(response.content["*/*"].schema, null, 2);
                 await writeDataToFile(schemaFileName, schemaString);
                 console.log(`Схема сохранена в файле: ${dirName}`);
               }
             }
           }
-          const schemaHelperFileName = `${dirName}/schemaHelper.txt`
-          await writeDataToFile(schemaHelperFileName, apiPathToSchemas.join("\n"))
+          const schemaHelperFileName = `${dirName}/schemaHelper.txt`;
+          await writeDataToFile(schemaHelperFileName, apiPathToSchemas.join("\n"));
         }
       }
     }
@@ -107,7 +106,7 @@ export async function createDir(directoryName: string) {
 
 export async function writeDataToFile(location: string, data: string) {
   try {
-    await fs.writeFile(location, data,{ encoding: "utf-8", flag: "w" });
+    await fs.writeFile(location, data, { encoding: "utf-8", flag: "w" });
   } catch (writeFileError) {
     console.error("Ошибка при записи в файл:", writeFileError);
   }

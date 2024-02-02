@@ -1,4 +1,4 @@
-export enum APIRoutes {
+export enum Endpoints {
   auth = "/auth",
   booking = "/booking",
   room = "/room",

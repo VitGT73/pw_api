@@ -12,7 +12,9 @@
   "paths": {
     "/{id}": {
       "get": {
-        "tags": ["booking-controller"],
+        "tags": [
+          "booking-controller"
+        ],
         "operationId": "getBooking",
         "parameters": [
           {
@@ -75,7 +77,9 @@
         }
       },
       "put": {
-        "tags": ["booking-controller"],
+        "tags": [
+          "booking-controller"
+        ],
         "operationId": "updateBooking",
         "parameters": [
           {
@@ -100,7 +104,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "required": ["depositpaid", "firstname", "lastname"],
+                "required": [
+                  "depositpaid",
+                  "firstname",
+                  "lastname"
+                ],
                 "type": "object",
                 "properties": {
                   "bookingid": {
@@ -132,7 +140,10 @@
                     "type": "string"
                   },
                   "bookingdates": {
-                    "required": ["checkin", "checkout"],
+                    "required": [
+                      "checkin",
+                      "checkout"
+                    ],
                     "type": "object",
                     "properties": {
                       "checkin": {
@@ -164,7 +175,11 @@
                       "format": "int32"
                     },
                     "booking": {
-                      "required": ["depositpaid", "firstname", "lastname"],
+                      "required": [
+                        "depositpaid",
+                        "firstname",
+                        "lastname"
+                      ],
                       "type": "object",
                       "properties": {
                         "bookingid": {
@@ -196,7 +211,10 @@
                           "type": "string"
                         },
                         "bookingdates": {
-                          "required": ["checkin", "checkout"],
+                          "required": [
+                            "checkin",
+                            "checkout"
+                          ],
                           "type": "object",
                           "properties": {
                             "checkin": {
@@ -247,7 +265,9 @@
         }
       },
       "delete": {
-        "tags": ["booking-controller"],
+        "tags": [
+          "booking-controller"
+        ],
         "operationId": "deleteBooking",
         "parameters": [
           {
@@ -312,7 +332,9 @@
     },
     "/": {
       "get": {
-        "tags": ["booking-controller"],
+        "tags": [
+          "booking-controller"
+        ],
         "operationId": "getBookings",
         "parameters": [
           {
@@ -374,13 +396,19 @@
         }
       },
       "post": {
-        "tags": ["booking-controller"],
+        "tags": [
+          "booking-controller"
+        ],
         "operationId": "createBooking",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "required": ["depositpaid", "firstname", "lastname"],
+                "required": [
+                  "depositpaid",
+                  "firstname",
+                  "lastname"
+                ],
                 "type": "object",
                 "properties": {
                   "bookingid": {
@@ -412,7 +440,10 @@
                     "type": "string"
                   },
                   "bookingdates": {
-                    "required": ["checkin", "checkout"],
+                    "required": [
+                      "checkin",
+                      "checkout"
+                    ],
                     "type": "object",
                     "properties": {
                       "checkin": {
@@ -475,7 +506,9 @@
     },
     "/summary": {
       "get": {
-        "tags": ["booking-controller"],
+        "tags": [
+          "booking-controller"
+        ],
         "operationId": "getSummaries",
         "parameters": [
           {
@@ -554,7 +587,11 @@
         }
       },
       "Booking": {
-        "required": ["depositpaid", "firstname", "lastname"],
+        "required": [
+          "depositpaid",
+          "firstname",
+          "lastname"
+        ],
         "type": "object",
         "properties": {
           "bookingid": {
@@ -586,7 +623,10 @@
             "type": "string"
           },
           "bookingdates": {
-            "required": ["checkin", "checkout"],
+            "required": [
+              "checkin",
+              "checkout"
+            ],
             "type": "object",
             "properties": {
               "checkin": {
@@ -602,7 +642,10 @@
         }
       },
       "BookingDates": {
-        "required": ["checkin", "checkout"],
+        "required": [
+          "checkin",
+          "checkout"
+        ],
         "type": "object",
         "properties": {
           "checkin": {
@@ -623,7 +666,11 @@
             "format": "int32"
           },
           "booking": {
-            "required": ["depositpaid", "firstname", "lastname"],
+            "required": [
+              "depositpaid",
+              "firstname",
+              "lastname"
+            ],
             "type": "object",
             "properties": {
               "bookingid": {
@@ -655,7 +702,10 @@
                 "type": "string"
               },
               "bookingdates": {
-                "required": ["checkin", "checkout"],
+                "required": [
+                  "checkin",
+                  "checkout"
+                ],
                 "type": "object",
                 "properties": {
                   "checkin": {

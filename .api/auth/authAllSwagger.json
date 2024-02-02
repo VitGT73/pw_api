@@ -12,7 +12,9 @@
   "paths": {
     "/validate": {
       "post": {
-        "tags": ["auth-controller"],
+        "tags": [
+          "auth-controller"
+        ],
         "operationId": "validateToken",
         "requestBody": {
           "content": {
@@ -50,7 +52,9 @@
     },
     "/logout": {
       "post": {
-        "tags": ["auth-controller"],
+        "tags": [
+          "auth-controller"
+        ],
         "operationId": "clearToken",
         "requestBody": {
           "content": {
@@ -83,7 +87,9 @@
     },
     "/login": {
       "post": {
-        "tags": ["auth-controller"],
+        "tags": [
+          "auth-controller"
+        ],
         "operationId": "createToken",
         "requestBody": {
           "content": {
