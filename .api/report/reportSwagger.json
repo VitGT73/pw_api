@@ -12,9 +12,7 @@
   "paths": {
     "/room/{id}": {
       "get": {
-        "tags": [
-          "report-controller"
-        ],
+        "tags": ["report-controller"],
         "operationId": "getSpecificRoomReport",
         "parameters": [
           {
@@ -64,9 +62,7 @@
     },
     "/": {
       "get": {
-        "tags": [
-          "report-controller"
-        ],
+        "tags": ["report-controller"],
         "operationId": "getAllRoomReports",
         "parameters": [
           {

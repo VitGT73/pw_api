@@ -12,9 +12,7 @@
   "paths": {
     "/": {
       "get": {
-        "tags": [
-          "branding-controller"
-        ],
+        "tags": ["branding-controller"],
         "operationId": "getBranding",
         "responses": {
           "200": {
@@ -22,11 +20,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "required": [
-                    "description",
-                    "logoUrl",
-                    "name"
-                  ],
+                  "required": ["description", "logoUrl", "name"],
                   "type": "object",
                   "properties": {
                     "name": {
@@ -36,10 +30,7 @@
                       "type": "string"
                     },
                     "map": {
-                      "required": [
-                        "latitude",
-                        "longitude"
-                      ],
+                      "required": ["latitude", "longitude"],
                       "type": "object",
                       "properties": {
                         "latitude": {
@@ -62,12 +53,7 @@
                       "type": "string"
                     },
                     "contact": {
-                      "required": [
-                        "address",
-                        "email",
-                        "name",
-                        "phone"
-                      ],
+                      "required": ["address", "email", "name", "phone"],
                       "type": "object",
                       "properties": {
                         "name": {
@@ -125,9 +111,7 @@
         }
       },
       "put": {
-        "tags": [
-          "branding-controller"
-        ],
+        "tags": ["branding-controller"],
         "operationId": "updateBranding",
         "parameters": [
           {
@@ -143,11 +127,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "required": [
-                  "description",
-                  "logoUrl",
-                  "name"
-                ],
+                "required": ["description", "logoUrl", "name"],
                 "type": "object",
                 "properties": {
                   "name": {
@@ -157,10 +137,7 @@
                     "type": "string"
                   },
                   "map": {
-                    "required": [
-                      "latitude",
-                      "longitude"
-                    ],
+                    "required": ["latitude", "longitude"],
                     "type": "object",
                     "properties": {
                       "latitude": {
@@ -183,12 +160,7 @@
                     "type": "string"
                   },
                   "contact": {
-                    "required": [
-                      "address",
-                      "email",
-                      "name",
-                      "phone"
-                    ],
+                    "required": ["address", "email", "name", "phone"],
                     "type": "object",
                     "properties": {
                       "name": {
@@ -283,11 +255,7 @@
         }
       },
       "Branding": {
-        "required": [
-          "description",
-          "logoUrl",
-          "name"
-        ],
+        "required": ["description", "logoUrl", "name"],
         "type": "object",
         "properties": {
           "name": {
@@ -297,10 +265,7 @@
             "type": "string"
           },
           "map": {
-            "required": [
-              "latitude",
-              "longitude"
-            ],
+            "required": ["latitude", "longitude"],
             "type": "object",
             "properties": {
               "latitude": {
@@ -323,12 +288,7 @@
             "type": "string"
           },
           "contact": {
-            "required": [
-              "address",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["address", "email", "name", "phone"],
             "type": "object",
             "properties": {
               "name": {
@@ -353,12 +313,7 @@
         }
       },
       "Contact": {
-        "required": [
-          "address",
-          "email",
-          "name",
-          "phone"
-        ],
+        "required": ["address", "email", "name", "phone"],
         "type": "object",
         "properties": {
           "name": {
@@ -381,10 +336,7 @@
         }
       },
       "Map": {
-        "required": [
-          "latitude",
-          "longitude"
-        ],
+        "required": ["latitude", "longitude"],
         "type": "object",
         "properties": {
           "latitude": {

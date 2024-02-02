@@ -6,224 +6,14 @@
   },
   "servers": [
     {
-      "url": "https://automationintesting.online/room/"
+      "url": "https://automationintesting.online/message/"
     }
   ],
   "paths": {
-    "/{id}": {
-      "get": {
-        "tags": [
-          "room-controller"
-        ],
-        "operationId": "getRoom",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "errorCode": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "error": {
-                      "type": "string"
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "fieldErrors": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
+    "/{id}/read": {
       "put": {
-        "tags": [
-          "room-controller"
-        ],
-        "operationId": "updateRoom",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "token",
-            "in": "cookie",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "required": [
-                  "roomName",
-                  "type"
-                ],
-                "type": "object",
-                "properties": {
-                  "roomid": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "roomName": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "pattern": "Single|Double|Twin|Family|Suite",
-                    "type": "string"
-                  },
-                  "accessible": {
-                    "type": "boolean"
-                  },
-                  "image": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "features": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "roomPrice": {
-                    "maximum": 999,
-                    "minimum": 1,
-                    "type": "integer",
-                    "format": "int32"
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "required": [
-                    "roomName",
-                    "type"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "roomid": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "roomName": {
-                      "type": "string"
-                    },
-                    "type": {
-                      "pattern": "Single|Double|Twin|Family|Suite",
-                      "type": "string"
-                    },
-                    "accessible": {
-                      "type": "boolean"
-                    },
-                    "image": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "features": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "roomPrice": {
-                      "maximum": 999,
-                      "minimum": 1,
-                      "type": "integer",
-                      "format": "int32"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "errorCode": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "error": {
-                      "type": "string"
-                    },
-                    "errorMessage": {
-                      "type": "string"
-                    },
-                    "fieldErrors": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "room-controller"
-        ],
-        "operationId": "deleteRoom",
+        "tags": ["message-controller"],
+        "operationId": "markAsRead",
         "parameters": [
           {
             "name": "id",
@@ -287,10 +77,8 @@
     },
     "/": {
       "get": {
-        "tags": [
-          "room-controller"
-        ],
-        "operationId": "getRooms",
+        "tags": ["message-controller"],
+        "operationId": "getMessages",
         "responses": {
           "200": {
             "description": "OK",
@@ -299,46 +87,23 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "rooms": {
+                    "messages": {
                       "type": "array",
                       "items": {
-                        "required": [
-                          "roomName",
-                          "type"
-                        ],
                         "type": "object",
                         "properties": {
-                          "roomid": {
+                          "id": {
                             "type": "integer",
                             "format": "int32"
                           },
-                          "roomName": {
+                          "name": {
                             "type": "string"
                           },
-                          "type": {
-                            "pattern": "Single|Double|Twin|Family|Suite",
+                          "subject": {
                             "type": "string"
                           },
-                          "accessible": {
+                          "read": {
                             "type": "boolean"
-                          },
-                          "image": {
-                            "type": "string"
-                          },
-                          "description": {
-                            "type": "string"
-                          },
-                          "features": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "roomPrice": {
-                            "maximum": 999,
-                            "minimum": 1,
-                            "type": "integer",
-                            "format": "int32"
                           }
                         }
                       }
@@ -379,61 +144,39 @@
         }
       },
       "post": {
-        "tags": [
-          "room-controller"
-        ],
-        "operationId": "createRoom",
-        "parameters": [
-          {
-            "name": "token",
-            "in": "cookie",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "tags": ["message-controller"],
+        "operationId": "createMessage",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "required": [
-                  "roomName",
-                  "type"
-                ],
+                "required": ["description", "email", "name", "phone", "subject"],
                 "type": "object",
                 "properties": {
-                  "roomid": {
+                  "messageid": {
                     "type": "integer",
                     "format": "int32"
                   },
-                  "roomName": {
+                  "name": {
                     "type": "string"
                   },
-                  "type": {
-                    "pattern": "Single|Double|Twin|Family|Suite",
+                  "email": {
                     "type": "string"
                   },
-                  "accessible": {
-                    "type": "boolean"
+                  "phone": {
+                    "maxLength": 21,
+                    "minLength": 11,
+                    "type": "string"
                   },
-                  "image": {
+                  "subject": {
+                    "maxLength": 100,
+                    "minLength": 5,
                     "type": "string"
                   },
                   "description": {
+                    "maxLength": 2000,
+                    "minLength": 20,
                     "type": "string"
-                  },
-                  "features": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "roomPrice": {
-                    "maximum": 999,
-                    "minimum": 1,
-                    "type": "integer",
-                    "format": "int32"
                   }
                 }
               }
@@ -447,41 +190,203 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "required": [
-                    "roomName",
-                    "type"
-                  ],
+                  "required": ["description", "email", "name", "phone", "subject"],
                   "type": "object",
                   "properties": {
-                    "roomid": {
+                    "messageid": {
                       "type": "integer",
                       "format": "int32"
                     },
-                    "roomName": {
+                    "name": {
                       "type": "string"
                     },
-                    "type": {
-                      "pattern": "Single|Double|Twin|Family|Suite",
+                    "email": {
                       "type": "string"
                     },
-                    "accessible": {
-                      "type": "boolean"
+                    "phone": {
+                      "maxLength": 21,
+                      "minLength": 11,
+                      "type": "string"
                     },
-                    "image": {
+                    "subject": {
+                      "maxLength": 100,
+                      "minLength": 5,
                       "type": "string"
                     },
                     "description": {
+                      "maxLength": 2000,
+                      "minLength": 20,
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errorCode": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "error": {
                       "type": "string"
                     },
-                    "features": {
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "fieldErrors": {
                       "type": "array",
                       "items": {
                         "type": "string"
                       }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "tags": ["message-controller"],
+        "operationId": "getMessage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errorCode": {
+                      "type": "integer",
+                      "format": "int32"
                     },
-                    "roomPrice": {
-                      "maximum": 999,
-                      "minimum": 1,
+                    "error": {
+                      "type": "string"
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "fieldErrors": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["message-controller"],
+        "operationId": "deleteMessage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "token",
+            "in": "cookie",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errorCode": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    },
+                    "fieldErrors": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/count": {
+      "get": {
+        "tags": ["message-controller"],
+        "operationId": "getCount",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
                       "type": "integer",
                       "format": "int32"
                     }
@@ -545,90 +450,84 @@
           }
         }
       },
-      "Room": {
-        "required": [
-          "roomName",
-          "type"
-        ],
+      "Message": {
+        "required": ["description", "email", "name", "phone", "subject"],
         "type": "object",
         "properties": {
-          "roomid": {
+          "messageid": {
             "type": "integer",
             "format": "int32"
           },
-          "roomName": {
+          "name": {
             "type": "string"
           },
-          "type": {
-            "pattern": "Single|Double|Twin|Family|Suite",
+          "email": {
             "type": "string"
           },
-          "accessible": {
-            "type": "boolean"
+          "phone": {
+            "maxLength": 21,
+            "minLength": 11,
+            "type": "string"
           },
-          "image": {
+          "subject": {
+            "maxLength": 100,
+            "minLength": 5,
             "type": "string"
           },
           "description": {
+            "maxLength": 2000,
+            "minLength": 20,
             "type": "string"
-          },
-          "features": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "roomPrice": {
-            "maximum": 999,
-            "minimum": 1,
+          }
+        }
+      },
+      "Count": {
+        "type": "object",
+        "properties": {
+          "count": {
             "type": "integer",
             "format": "int32"
           }
         }
       },
-      "Rooms": {
+      "MessageSummary": {
         "type": "object",
         "properties": {
-          "rooms": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "read": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Messages": {
+        "type": "object",
+        "properties": {
+          "messages": {
             "type": "array",
             "items": {
-              "required": [
-                "roomName",
-                "type"
-              ],
               "type": "object",
               "properties": {
-                "roomid": {
+                "id": {
                   "type": "integer",
                   "format": "int32"
                 },
-                "roomName": {
+                "name": {
                   "type": "string"
                 },
-                "type": {
-                  "pattern": "Single|Double|Twin|Family|Suite",
+                "subject": {
                   "type": "string"
                 },
-                "accessible": {
+                "read": {
                   "type": "boolean"
-                },
-                "image": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "features": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "roomPrice": {
-                  "maximum": 999,
-                  "minimum": 1,
-                  "type": "integer",
-                  "format": "int32"
                 }
               }
             }
