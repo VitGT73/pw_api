@@ -1,0 +1,37 @@
+{
+  "required": [
+    "description",
+    "email",
+    "name",
+    "phone",
+    "subject"
+  ],
+  "type": "object",
+  "properties": {
+    "messageid": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "maxLength": 21,
+      "minLength": 11,
+      "type": "string"
+    },
+    "subject": {
+      "maxLength": 100,
+      "minLength": 5,
+      "type": "string"
+    },
+    "description": {
+      "maxLength": 2000,
+      "minLength": 20,
+      "type": "string"
+    }
+  }
+}

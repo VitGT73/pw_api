@@ -1,0 +1,70 @@
+{
+  "required": [
+    "description",
+    "logoUrl",
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 100,
+      "minLength": 3,
+      "pattern": "[A-Za-z& ]*",
+      "type": "string"
+    },
+    "map": {
+      "required": [
+        "latitude",
+        "longitude"
+      ],
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "logoUrl": {
+      "type": "string"
+    },
+    "description": {
+      "maxLength": 500,
+      "minLength": 3,
+      "pattern": "[a-zA-Z,&. ]*",
+      "type": "string"
+    },
+    "contact": {
+      "required": [
+        "address",
+        "email",
+        "name",
+        "phone"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "maxLength": 40,
+          "minLength": 3,
+          "pattern": "[A-Za-z& ]*",
+          "type": "string"
+        },
+        "address": {
+          "maxLength": 200,
+          "minLength": 10,
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

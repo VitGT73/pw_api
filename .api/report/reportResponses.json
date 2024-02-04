@@ -2,12 +2,16 @@
   "paths": {
     "/room/{id}": {
       "get": {
-        "responses": ["200"]
+        "responses": [
+          "200"
+        ]
       }
     },
     "/": {
       "get": {
-        "responses": ["200"]
+        "responses": [
+          "200"
+        ]
       }
     }
   }

@@ -4,9 +4,12 @@
 
 import { test, expect } from "@fixtures/fixtures";
 import { createHeaders, createInvalidHeaders } from "@helpers/createHeaders";
+import {getSchemaFromSwagger} from "@helpers/swaggerParser"
 import { validateJsonSchema } from "@helpers/validateJsonSchema";
 import { addWarning } from "@helpers/warnings";
 // import { validateAgainstSchema } from "@helpers/validateAgainstSchema";
+
+const endpoint= "/booking";
 
 test.describe("booking/ GET requests @booking", async () => {
   let headers;
@@ -92,8 +95,12 @@ test.describe("booking/ GET requests @booking", async () => {
     expect(body).toBe("");
   });
 
-  test("GET booking by id with details", async ({ request }) => {
-    const response = await request.get("booking/1", {
+  test.only("GET booking by id with details", async ({ request }) => {
+    const path = "/{id}"
+    const method = "get"
+    const expectedCode= "200"
+
+    const response = await request.get(`/booking/1`, {
       headers: headers,
     });
 
@@ -108,7 +115,12 @@ test.describe("booking/ GET requests @booking", async () => {
     expect(body.bookingdates.checkin).toBeValidDate();
     expect(body.bookingdates.checkout).toBeValidDate();
 
-    await validateJsonSchema("GET_booking_id", "booking", body);
+    console.log(path, method, expectedCode)
+    const schema = await getSchemaFromSwagger(endpoint, path, method, expectedCode)
+    console.log(schema)
+
+    await validateJsonSchema(schema, body);
+    // await validateJsonSchema("GET_booking_id", "booking", body);
   });
 
   test("GET booking by id that doesn't exist", async ({ request }) => {

@@ -1,0 +1,49 @@
+{
+  "type": "object",
+  "properties": {
+    "rooms": {
+      "type": "array",
+      "items": {
+        "required": [
+          "roomName",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "roomid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roomName": {
+            "type": "string"
+          },
+          "type": {
+            "pattern": "Single|Double|Twin|Family|Suite",
+            "type": "string"
+          },
+          "accessible": {
+            "type": "boolean"
+          },
+          "image": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "roomPrice": {
+            "maximum": 999,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  }
+}

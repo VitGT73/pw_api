@@ -2,17 +2,23 @@
   "paths": {
     "/validate": {
       "post": {
-        "responses": ["200"]
+        "responses": [
+          "200"
+        ]
       }
     },
     "/logout": {
       "post": {
-        "responses": ["200"]
+        "responses": [
+          "200"
+        ]
       }
     },
     "/login": {
       "post": {
-        "responses": ["200"]
+        "responses": [
+          "200"
+        ]
       }
     }
   }

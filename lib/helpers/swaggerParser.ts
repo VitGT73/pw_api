@@ -54,9 +54,11 @@ export async function getSwaggerFromFile(endpoint: string) {
   }
 }
 
-export async function getSchemaFromSwagger(endpoint: string, method: string, responseCode: string) {
+export async function getSchemaFromSwagger(endpoint: string, path: string, method: string, responseCode: string) {
   const swagger = await getSwaggerFromFile(endpoint);
-  const schema = swagger.paths[endpoint][method]["responses"][responseCode]["content"]["*/*"].schema;
+  console.log(swagger)
+  const schema = swagger.paths[path][method]["responses"][responseCode]["content"]["*/*"].schema;
+  console.log(`схема для ${endpoint}, ${path}, ${method}, ${responseCode}`, schema)
   return schema;
 }
 

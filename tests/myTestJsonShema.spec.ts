@@ -2,39 +2,25 @@ import { Endpoints, EndpointKeys } from "@helpers/endpoints";
 import {
   saveSwaggerToFile,
   getSwaggerFromFile,
-  // saveSchemasToFile,
+  saveSchemasToFile,
   saveAllVarianOfResponses,
 } from "@helpers/swaggerParser";
 import { test } from "@playwright/test";
 
-test.describe.only("booking/ POST requests @booking", async () => {
+test.describe("booking/ POST requests @booking", async () => {
   for (const endpoint of EndpointKeys) {
-    test.only(`For ${endpoint} save JSON Swagger to local file`, async () => {
+    test(`For ${endpoint} save JSON Swagger to local file`, async () => {
       const jsonURL = Endpoints[endpoint].swaggerURL;
       await saveSwaggerToFile(jsonURL, endpoint);
     });
   }
 
   for (const endpoint of EndpointKeys) {
-    test.only(`Get all methods for ${endpoint}`, async () => {
+    test(`Get all methods for ${endpoint}`, async () => {
       // await saveSchemasToFile(endpoint);
       await saveAllVarianOfResponses(endpoint);
     });
   }
-
-  // Object.keys(Endpoints).forEach((endpoint) => {
-  //   test.only(`For ${endpoint} save JSON Swagger to local file`, async () => {
-  //   const jsonURL = JsonURL[endpoint];
-  //   await saveSwaggerToFile(jsonURL, Endpoints[endpoint]);
-  //   });
-  // });
-
-  // Object.values(Endpoints).forEach((endpoint) => {
-  //   test(`Get all methods for ${endpoint}`, async () => {
-  //     await saveSchemasToFile(endpoint);
-  //     await saveAllVarianOfResponses(endpoint);
-  //   });
-  // });
 
   test("Get schemas /auth from file", async () => {
     const schema = await getSwaggerFromFile(EndpointKeys["auth"]);
@@ -61,7 +47,10 @@ test.describe.only("booking/ POST requests @booking", async () => {
   //   console.log("GET /summary - 400", schema.paths["/summary"]["get"]["responses"][400]["content"]["*/*"].schema);
   // });
 
-  // test.only("Save all schemas for endpoint to files", async () => {
-  //   await saveAllSchemasToFile()
-  // });
+  test.only("Save all schemas for endpoint to files", async () => {
+    for (const endpoint of EndpointKeys) {
+    await saveSchemasToFile(endpoint)
+  }
+  });
+
 });

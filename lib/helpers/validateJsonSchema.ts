@@ -4,6 +4,7 @@ import Ajv from "ajv";
 
 export async function validateJsonSchema(schema: object, body: object) {
   const ajv = new Ajv({ allErrors: false });
+  console.log(schema)
   const validate = ajv.compile(schema);
   const validRes = validate(body);
 
