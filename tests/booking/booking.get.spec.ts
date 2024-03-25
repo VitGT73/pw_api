@@ -4,12 +4,12 @@
 
 import { test, expect } from "@fixtures/fixtures";
 import { createHeaders, createInvalidHeaders } from "@helpers/createHeaders";
-import {getSchemaFromSwagger} from "@helpers/swaggerParser"
+import { getSchemaFromSwagger } from "@helpers/swaggerParser";
 import { validateJsonSchema } from "@helpers/validateJsonSchema";
 import { addWarning } from "@helpers/warnings";
 // import { validateAgainstSchema } from "@helpers/validateAgainstSchema";
 
-const endpoint= "/booking";
+const endpoint = "/booking";
 
 test.describe("booking/ GET requests @booking", async () => {
   let headers;
@@ -96,9 +96,9 @@ test.describe("booking/ GET requests @booking", async () => {
   });
 
   test.only("GET booking by id with details", async ({ request }) => {
-    const path = "/{id}"
-    const method = "get"
-    const expectedCode= "200"
+    const path = "/{id}";
+    const method = "get";
+    const expectedCode = "200";
 
     const response = await request.get(`/booking/1`, {
       headers: headers,
@@ -115,9 +115,9 @@ test.describe("booking/ GET requests @booking", async () => {
     expect(body.bookingdates.checkin).toBeValidDate();
     expect(body.bookingdates.checkout).toBeValidDate();
 
-    console.log(path, method, expectedCode)
-    const schema = await getSchemaFromSwagger(endpoint, path, method, expectedCode)
-    console.log(schema)
+    console.log(path, method, expectedCode);
+    const schema = await getSchemaFromSwagger(endpoint, path, method, expectedCode);
+    console.log(schema);
 
     await validateJsonSchema(schema, body);
     // await validateJsonSchema("GET_booking_id", "booking", body);

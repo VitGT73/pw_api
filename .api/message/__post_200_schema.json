@@ -1,11 +1,5 @@
 {
-  "required": [
-    "description",
-    "email",
-    "name",
-    "phone",
-    "subject"
-  ],
+  "required": ["description", "email", "name", "phone", "subject"],
   "type": "object",
   "properties": {
     "messageid": {

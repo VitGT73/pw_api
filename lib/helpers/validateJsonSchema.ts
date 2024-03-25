@@ -1,19 +1,19 @@
-// import { createJsonSchema } from "@helpers/schemaHelperFunctions";
+import { createJsonSchema } from "@helpers/schemaHelperFunctions";
 import { expect } from "@playwright/test";
 import Ajv from "ajv";
 
-export async function validateJsonSchema(schema: object, body: object) {
-  const ajv = new Ajv({ allErrors: false });
-  console.log(schema)
-  const validate = ajv.compile(schema);
-  const validRes = validate(body);
+// export async function validateJsonSchema(schema: object, body: object) {
+//   const ajv = new Ajv({ allErrors: false });
+//   console.log(schema);
+//   const validate = ajv.compile(schema);
+//   const validRes = validate(body);
 
-  if (!validRes) {
-    console.log("SCHEMA ERRORS:", JSON.stringify(validate.errors), "\nRESPONSE BODY:", JSON.stringify(body));
-  }
+//   if (!validRes) {
+//     console.log("SCHEMA ERRORS:", JSON.stringify(validate.errors), "\nRESPONSE BODY:", JSON.stringify(body));
+//   }
 
-  expect(validRes).toBe(true);
-}
+//   expect(validRes).toBe(true);
+// }
 
 /**
  * Validates an object against a JSON schema.
@@ -33,24 +33,24 @@ export async function validateJsonSchema(schema: object, body: object) {
  *    await validateJsonSchema("POST_booking", "booking", body, true);
  */
 
-// export async function validateJsonSchema(fileName: string, filePath: string, body: object, createSchema = false) {
-//   const jsonName = fileName;
-//   const path = filePath;
+export async function validateJsonSchema(fileName: string, filePath: string, body: object, createSchema = false) {
+  const jsonName = fileName;
+  const path = filePath;
 
-//   if (createSchema) {
-//     await createJsonSchema(jsonName, path, body);
-//   }
+  if (createSchema) {
+    await createJsonSchema(jsonName, path, body);
+  }
 
-//   // eslint-disable-next-line @typescript-eslint/no-var-requires
-//   const existingSchema = require(`../../.api/${path}/${jsonName}_schema.json`);
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const existingSchema = require(`../../.api/${path}/${jsonName}_schema.json`);
 
-//   const ajv = new Ajv({ allErrors: false });
-//   const validate = ajv.compile(existingSchema);
-//   const validRes = validate(body);
+  const ajv = new Ajv({ allErrors: false });
+  const validate = ajv.compile(existingSchema);
+  const validRes = validate(body);
 
-//   if (!validRes) {
-//     console.log("SCHEMA ERRORS:", JSON.stringify(validate.errors), "\nRESPONSE BODY:", JSON.stringify(body));
-//   }
+  if (!validRes) {
+    console.log("SCHEMA ERRORS:", JSON.stringify(validate.errors), "\nRESPONSE BODY:", JSON.stringify(body));
+  }
 
-//   expect(validRes).toBe(true);
-// }
+  expect(validRes).toBe(true);
+}

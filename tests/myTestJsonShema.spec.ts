@@ -49,8 +49,7 @@ test.describe("booking/ POST requests @booking", async () => {
 
   test.only("Save all schemas for endpoint to files", async () => {
     for (const endpoint of EndpointKeys) {
-    await saveSchemasToFile(endpoint)
-  }
+      await saveSchemasToFile(endpoint);
+    }
   });
-
 });

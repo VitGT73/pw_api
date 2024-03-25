@@ -2,46 +2,28 @@
   "paths": {
     "/{id}/read": {
       "put": {
-        "responses": [
-          "200",
-          "400"
-        ]
+        "responses": ["200", "400"]
       }
     },
     "/": {
       "get": {
-        "responses": [
-          "200",
-          "400"
-        ]
+        "responses": ["200", "400"]
       },
       "post": {
-        "responses": [
-          "200",
-          "400"
-        ]
+        "responses": ["200", "400"]
       }
     },
     "/{id}": {
       "get": {
-        "responses": [
-          "200",
-          "400"
-        ]
+        "responses": ["200", "400"]
       },
       "delete": {
-        "responses": [
-          "200",
-          "400"
-        ]
+        "responses": ["200", "400"]
       }
     },
     "/count": {
       "get": {
-        "responses": [
-          "200",
-          "400"
-        ]
+        "responses": ["200", "400"]
       }
     }
   }

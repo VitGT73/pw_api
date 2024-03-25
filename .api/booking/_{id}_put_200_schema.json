@@ -6,11 +6,7 @@
       "format": "int32"
     },
     "booking": {
-      "required": [
-        "depositpaid",
-        "firstname",
-        "lastname"
-      ],
+      "required": ["depositpaid", "firstname", "lastname"],
       "type": "object",
       "properties": {
         "bookingid": {
@@ -42,10 +38,7 @@
           "type": "string"
         },
         "bookingdates": {
-          "required": [
-            "checkin",
-            "checkout"
-          ],
+          "required": ["checkin", "checkout"],
           "type": "object",
           "properties": {
             "checkin": {

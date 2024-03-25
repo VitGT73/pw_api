@@ -1,8 +1,5 @@
 {
-  "required": [
-    "roomName",
-    "type"
-  ],
+  "required": ["roomName", "type"],
   "type": "object",
   "properties": {
     "roomid": {
